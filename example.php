@@ -15,21 +15,15 @@
     You should have received a copy of the GNU General Public License
     along with mfp.  If not, see <http://www.gnu.org/licenses/>.
 */
-include './FlotGraph.php';
+include './Class/FlotGraph.php';
+include './Class/SimpleMysql.php';
 
-$dataArray	= array( "TestStuff1" => array( 1 => 20,
-						2 => 23,
-						3 => 24,
-						4 => 28,
-						5 => 82,
-						6 => 18 ),
-			"TestStuff2" => array(	1 => 11,
-						2 => 25,
-						3 => 8,
-						4 => 9,
-						5 => 1,
-						6 => 50 ) );
+$simpleMysql	= new SimpleMysql( "host", "user", "pass", "database" );
 
+									// xField, yField, mysql table name, order query by, query result limit.
+$dataArray	= array( "Graph Title" => $simpleMysql->getXYFromTable( "xField", "yField", "MysqlTableName", "orderBy", 200 ) );
+
+				// dataArray, html placeholder id.
 $myFlotGraph	= new FlotGraph( $dataArray, "test" );
 ?>
 <html>
