@@ -39,7 +39,6 @@ class SimpleMysql{
 		$tmpQuery	.= " DESC LIMIT $limit";
 
 		$result		= mysql_query( $tmpQuery );
-		
 		$returnArray	= array();
 		while( $mysqlArray = mysql_fetch_array( $result, MYSQL_NUM ) ){
 			$returnArray[$mysqlArray[0]] = $mysqlArray[1];

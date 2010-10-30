@@ -19,33 +19,20 @@
 include './Class/FlotGraph.php';
 include './Class/SimpleMysql.php';
 
-// Create a new Instance of SimpleMysql. Specify the host, user, pass and database.
-$simpleMysql	= new SimpleMysql( "host", "user", "pass", "database" );
-/* Create a new dataArray, setting the graph title(s) and
-   the xyArray(s). */
-$dataArray	= array( "Graph Title" => $simpleMysql->getXYFromTable( "x", "y", "table", "x", 200 ),
-			 "Another Graph" => array(	1 => 5,
-							2 => 2,
-							3 => 51,
-							4 => 12,
-							5 => 7 )
-		);
-/* Create the graph instance using the data array and the 
-   HTML id value to graph to. */
-$myFlotGraph	= new FlotGraph( $dataArray, "test" );
+$simpleMysql	= new SimpleMysql( "mysqlHost", "mysqlUser", "mysqlPass", "mysqlDatabase" );
+$dataArray	= array( "GraphTitle" => $simpleMysql->getXYFromTable( "xField", "yField", "mysqlTable", "orderBy", 500 ) );
+$FlotGraph	= new FlotGraph( $dataArray, "htmlPlaceholder" );
 ?>
 <html>
 	<head>
-		<title>Examples</title>
-		<!-- Include both jquery and jquery.flot -->
+		<title>Example</title>
+		<link href='include/style.css' rel='stylesheet' type='text/css'>
 		<script type='text/javascript' src='include/jquery.js'></script>
 		<script type='text/javascript' src='include/jquery.flot.js'></script>
-		<!-- Call the function to generate valid flot javascript. -->
-		<?php echo $myFlotGraph->getJavascript(); ?>
+		<?php echo $FlotGraph->getJavascript(); ?>
 	</head>
 	<body>
-		<h2>Simple Example</h2>
-		<!-- Specify a width and height, and an id. -->
-		<div id='test' style='width:600px; height:150px;'></div>
+		<h2>Example Graph</h2>
+		<div id='htmlPlaceholder' style='width:600px; height:150px;'></div>
 	</body>
 </html>
