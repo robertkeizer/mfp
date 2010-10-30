@@ -1,0 +1,6 @@
+mfp is a small set of classes that allows for easy flot graph
+generation based on data from a mysql database.
+
+mfp is licensed under the GNU GPLv3.
+
+Patches / Pull requests welcome. Contact robert@keizer.ca.
