@@ -25,20 +25,12 @@ class SimpleMysql{
 		mysql_select_db( $db, $this->_dbHandle );
 	}
 
-	public function getXYFromTable( $xField, $yField, $table, $orderBy = null, $limit = 200 ){
-		$table		= mysql_real_escape_string( $table );
-		$xField		= mysql_real_escape_string( $xField );
-		$yField		= mysql_real_escape_string( $yField );
-		$limit		= mysql_real_escape_string( $limit );
-		$orderBy	= mysql_real_escape_string( $orderBy );
-
-		$tmpQuery	= "SELECT $xField, $yField FROM $table";
-		if( $orderBy != null ){
-			$tmpQuery .= " ORDER BY {$orderBy}";
+	public function getXYFromTable( $query ){
+		$result		= mysql_query( $query, $this->_dbHandle );
+		if( !$result ){
+			echo "DEBUG: mysql query error: ".mysql_error()."\n";
 		}
-		$tmpQuery	.= " DESC LIMIT $limit";
 
-		$result		= mysql_query( $tmpQuery );
 		$returnArray	= array();
 		while( $mysqlArray = mysql_fetch_array( $result, MYSQL_NUM ) ){
 			$returnArray[$mysqlArray[0]] = $mysqlArray[1];
