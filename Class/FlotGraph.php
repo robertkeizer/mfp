@@ -21,7 +21,6 @@ class FlotGraph{
 	private $_dataArray;
 	private $_placeHolder;
 	private $_timeVar = null;
-	private $_checkBoxes = false;
 	private $_legendPosition = "nw";
 
 	public function __construct( Array $dataArray, $placeHolder ){
@@ -35,10 +34,6 @@ class FlotGraph{
 		}
 	}
 	
-	public function setCheckboxes( bool $enableCheckboxes ){
-		$this->_checkBoxes = $enableCheckBoxes;
-	}
-
 	public function setLegendPosition( $position ){
 		$this->_legendPosition	= $position;
 	}
@@ -102,11 +97,6 @@ class FlotGraph{
 
 		// End the above.. to complete the javascript. End of options..
 		$returnString .= " } ); \n});";
-
-		// Check for checkboxes..
-		if( $this->_checkBoxes ){
-			// Write some fancy javascript to turn series on or off.
-		}
 
 		$returnString	.= "</script>\n";
 
