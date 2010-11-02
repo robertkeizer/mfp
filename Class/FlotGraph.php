@@ -21,6 +21,7 @@ class FlotGraph{
 	private $_dataArray;
 	private $_placeHolder;
 	private $_timeVar = null;
+	private $_checkBoxes = false;
 
 	public function __construct( Array $dataArray, $placeHolder ){
 		$this->_dataArray	= $dataArray;
@@ -28,13 +29,15 @@ class FlotGraph{
 	}
 
 	public function setTimeVar( $var ){
-		if( strtolower( $var ) == 'x' ){
-			$this->_timeVar = 'x';
-		}else{
-			$this->_timeVar = 'y';
+		if( strtlower( $var ) == 'x' || strtolower( $var ) == 'y' ) {
+			$this->_timeVar = $var;
 		}
 	}
 	
+	public function setCheckboxes( bool $enableCheckboxes ){
+		$this->_checkBoxes = $enableCheckBoxes;
+	}
+
 	public function getJavascript( ){
 		// A temporary array to store dataArrayNames..
 		$dataArrayNames	= array();
