@@ -25,7 +25,7 @@ class FlotGraph{
 		$this->_dataArray	= $dataArray;
 		$this->_placeHolder	= $placeHolder;
 	}
-
+	
 	public function getJavascript( ){
 		// A temporary array to store dataArrayNames..
 		$dataArrayNames	= array();
