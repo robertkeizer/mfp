@@ -63,12 +63,21 @@ class FlotGraph{
 		// Make the master js array which has all the other arrays as elements..
 		$returnString	.= "var {$this->_placeHolder}_data = [ ";
 		for( $tmpCounter=0; $tmpCounter<count( $dataArrayNames ); $tmpCounter++ ){
-			// If we are not at the last one..
-			if( $tmpCounter != count( $dataArrayNames )-1 ){
-				$returnString .= "{ data: {$dataArrayNames[$tmpCounter]}_data, label: \"{$dataArrayNames[$tmpCounter]}\" }, ";
-			}else{	// Last one.
-				$returnString .= "{ data: {$dataArrayNames[$tmpCounter]}_data, label: \"{$dataArrayNames[$tmpCounter]}\" }";
+
+			// Open ended for a reason, no ending } so that we can check if time or special styles are applied.
+			$returnString .= "{ data: {$dataArrayNames[$tmpCounter]}_data, label: \"{$dataArrayNames[$tmpCounter]}\"";
+			// Check for time..
+			if( $this->_timeVar !== null ){
+				
 			}
+
+			// The ending }. Appended after checking for other things..
+			$returnString .= " }";
+			// This is so that only the last item in the array doesn't get a ,
+			if( $tmpCounter != count( $dataArrayNames )-1 ){
+				$returnString .= ", ";
+			}
+
 		}
 		$returnString	.= " ];\n";
 		
