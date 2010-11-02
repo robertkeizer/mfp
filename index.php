@@ -25,9 +25,11 @@ include './config.php';
 		<script type='text/javascript' src='include/jquery.js'></script>
 		<script type='text/javascript' src='include/jquery.flot.js'></script>
 		<?php
-		foreach( $graphArray as $graphName => $graphItemArray ){
-			$tmpGraphInstance = new FlotGraph( $graphItemArray, safeName( $graphName ) );
-			$tmpGraphInstance->setTimeVar("x");
+		foreach( $graphArray as $graphName => $graphItemTotal ){
+			$tmpGraphInstance = new FlotGraph( $graphItemTotal['data'], safeName( $graphName ) );
+			foreach( $graphItemTotal['options'] as $func => $arg ){
+				$tmpGraphInstance->$func($arg);
+			}
 			echo $tmpGraphInstance->getJavascript(); 
 		}
 		?>

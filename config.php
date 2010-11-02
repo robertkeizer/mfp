@@ -31,15 +31,23 @@ function safeName( $name ){
 function ExampleGenSql( $y, $name ){
 	// The CONCAT for time is used for turning the epoch time into javascript microseconds.. see how flot takes time arguments.
 	// The subtraction of 18000000 is for the timezone, so graph does not appear in GMT.
-	return "SELECT CONCAT(time, \"000-18000000\"), {$y} from machine WHERE name='{$name}' order by time desc limit 200";
+	return "SELECT CONCAT(time, \"000-18000000\"), {$y} from machine WHERE name='{$name}' order by time desc limit 360";
 }
 
 $simpleMysql	= new SimpleMysql( "host", "user", "pass", "database" );
-$graphArray	= array(	"Load Average"	=> array(	"Core01" => $simpleMysql->getXYFromTable( ExampleGenSql( "loadAverage", "core01" ) ),
-								"Core02" => $simpleMysql->getXYFromTable( ExampleGenSql( "loadAverage", "core02" ) ),
-								"NotDesktop" => $simpleMysql->getXYFromTable( ExampleGenSql( "loadAverage", "notdesktop" ) ) ),
-
-				"Process count" => array(	"Core01" => $simpleMysql->getXYFromTable( ExampleGenSql( "processCount", "core01" ) ),
-								"Core02" => $simpleMysql->getXYFromTable( ExampleGenSql( "processCount", "core02" ) ),
-								"NotDesktop" => $simpleMysql->getXYFromTable( ExampleGenSql( "processCount", "notdesktop" ) ) ) );
+$graphArray	= array(	"Load Average"	=> array(	"options" => array( "setTimeVar" => "x" ),
+								"data" => array(
+									"Core01" => $simpleMysql->getXYFromTable( ExampleGenSql( "loadAverage", "core01" ) ),
+									"Core02" => $simpleMysql->getXYFromTable( ExampleGenSql( "loadAverage", "core02" ) ),
+									"NotDesktop" => $simpleMysql->getXYFromTable( ExampleGenSql( "loadAverage", "notdesktop" ) )
+								)
+						),
+				"Process count" => array(	"options" => array( "setTimeVar" => "x" ),
+								"data" => array( 
+									"Core01" => $simpleMysql->getXYFromTable( ExampleGenSql( "processCount", "core01" ) ),
+									"Core02" => $simpleMysql->getXYFromTable( ExampleGenSql( "processCount", "core02" ) ),
+									"NotDesktop" => $simpleMysql->getXYFromTable( ExampleGenSql( "processCount", "notdesktop" ) )
+								)
+						)
+			);
 ?>
