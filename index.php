@@ -33,12 +33,20 @@ include './config.php';
 			echo $tmpGraphInstance->getJavascript(); 
 		}
 		?>
+		<script type='text/javascript'>
+			$(document).ready( function( ){
+				$(".graphContainer:odd").css( {'background-color': '#eee', 'border': '1px solid #ccc'} );
+				$(".graphContainer:odd").children(".graphPlaceholder").css( {'background-color': '#fff', 'border': '1px solid #ccc'} );
+			} );
+		</script>
 	</head>
 	<body>
 		<?php
-		foreach( $graphArray as $graphName => $graphItemTotal ){
+		foreach( $graphArray as $graphName => $graphStuff ){
+			echo "<div class='graphContainer'>";
 			echo "<h2>{$graphName}</h2>\n";
-			echo "<div id='".safeName($graphName)."' style='width:600px; height:150px;'></div>\n";
+			echo "<div class='graphPlaceholder' id='".safeName($graphName)."' style='width:600px; height:150px;'></div>\n";
+			echo "</div>";
 		}
 		?>
 	</body>

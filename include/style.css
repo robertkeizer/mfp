@@ -2,3 +2,14 @@ body {
 	font-family: Arial;
 	font-size: 120%;
 }
+.graphContainer h2 {
+	font-size: 120%;
+	font-weight: bold;
+	margin-top: 5px;
+	margin-left: 5px;
+	margin-bottom: 0px;
+	margin-right: 0px;
+}
+.graphPlaceholder {
+	margin: 5px;
+}

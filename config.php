@@ -23,7 +23,7 @@ function __autoload( $class ){
 }
 
 function safeName( $name ){
-	return md5( $name );
+	return "a".md5( $name );
 }
 
 // This is just an example function to show how configs could be cut down. Modification of this function
@@ -49,6 +49,12 @@ $graphArray	= array(	"Load Average"	=> array(	"options" => array( 	"setTimeVar" 
 									"Core02" => $simpleMysql->getXYFromTable( ExampleGenSql( "processCount", "core02" ) ),
 									"NotDesktop" => $simpleMysql->getXYFromTable( ExampleGenSql( "processCount", "notdesktop" ) )
 								)
-						)
+						),
+				"Load by Process count" => array(	"options" => array( "setLegendPosition" => "nw", "disableLines" => "", "enablePoints" => "" ),
+									"data" => array(
+										"Core01" => $simpleMysql->getXYFromTable( "SELECT loadAverage, processCount FROM machine WHERE name='core01' order by time desc limit 360" ),
+										"Core02" => $simpleMysql->getXYFromTable( "SELECT loadAverage, processCount FROM machine WHERE name='core02' order by time desc limit 360" )
+									)
+								)
 			);
 ?>

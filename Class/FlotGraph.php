@@ -22,6 +22,9 @@ class FlotGraph{
 	private $_placeHolder;
 	private $_timeVar = null;
 	private $_legendPosition = "nw";
+	private $_enableLines = true;
+	private $_enablePoints = false;
+	private $_enableBars = false;
 
 	public function __construct( Array $dataArray, $placeHolder ){
 		$this->_dataArray	= $dataArray;
@@ -36,6 +39,30 @@ class FlotGraph{
 	
 	public function setLegendPosition( $position ){
 		$this->_legendPosition	= $position;
+	}
+
+	public function enablePoints( ){
+		$this->_enablePoints	= true;
+	}
+
+	public function disablePoints( ){
+		$this->_enablePoints	= false;
+	}
+
+	public function enableBars( ){
+		$this->_enableBars	= true;
+	}
+
+	public function disableBars( ){
+		$this->_enableBars	= false;
+	}
+
+	public function enableLines( ){
+		$this->_enableLines	= true;
+	}
+	
+	public function disableLines( ){
+		$this->_enableLines	= false;
 	}
 
 	public function getJavascript( ){
@@ -86,14 +113,42 @@ class FlotGraph{
 				$returnString .= "{$this->_timeVar}axis: { mode: \"time\" }";
 			}
 
-			// Check for where the legend should be displayed, if at all.
-			$returnString .= ", legend: { ";
+			// Need to check _timeVar so that the comma is in the right spot.. this is temporary.
+			// Legend..
+			if( $this->_timeVar !== null ){
+				$returnString .= ", legend: { ";
+			}else{
+				$returnString .= " legend: { ";
+			}
+			
 			if( $this->_legendPosition !== false ){
 				$returnString .= "show: true, position: \"{$this->_legendPosition}\"";
 			}else{
 				$returnString .= "show: false";
 			}
 			$returnString .= "}";
+			// End of legend stuff.
+
+			// Check for lines..
+			if( $this->_enableLines ){
+				$returnString .= ", lines: { show: true }";
+			}else{
+				$returnString .= ", lines: { show: false }";
+			}
+
+			// Check for points.
+			if( $this->_enablePoints ){
+				$returnString .= ", points: { show: true }";
+			}else{
+				$returnString .= ", points: { show: false }";
+			}
+			
+			// Check for bars
+			if( $this->_enabledBars ){
+				$returnString .= ", bars: { show: true }";
+			}else{
+				$returnString .= ", bars: { show: false }";
+			}
 
 		// End the above.. to complete the javascript. End of options..
 		$returnString .= " } ); \n});";
