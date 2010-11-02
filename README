@@ -10,3 +10,9 @@ The config for mfp is fairly straight forward. It consists of many arrays, neste
 Current FlotGraph methods:
 	"setTimeVar" which can either be "x" or "y", and turns the mode of the graph into time
 	"setLegendPosition" which can be a string of "ne", "nw", "se", "sw", or false. False disables legend.
+	"enablePoints"
+	"disablePoints"
+	"enableLines", Usually not needed since true by default.
+	"disableLines"
+	"enableBars"
+	"disableBars"
