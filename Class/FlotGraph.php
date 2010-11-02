@@ -20,10 +20,19 @@ class FlotGraph{
 
 	private $_dataArray;
 	private $_placeHolder;
+	private $_timeVar = null;
 
 	public function __construct( Array $dataArray, $placeHolder ){
 		$this->_dataArray	= $dataArray;
 		$this->_placeHolder	= $placeHolder;
+	}
+
+	public function setTimeVar( $var ){
+		if( strtolower( $var ) == 'x' ){
+			$this->_timeVar = 'x';
+		}else{
+			$this->_timeVar = 'y';
+		}
 	}
 	
 	public function getJavascript( ){
