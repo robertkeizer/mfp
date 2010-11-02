@@ -1,0 +1,29 @@
+General layout of the config array:
+
+graphArray => array(    "Graph Title 1" =>      "options" => array(     "FlotGraphFunction" => "argument",
+                                                                        "FlotGraphFunction2" => "argument2" ),
+                                                "data"  => array(
+                                                                        "NameOfData" => array( "x" => "y", "x" => "y", "x" => "y" ),
+                                                                        "NameOfData2" => array( "x" => "y", "x" => "y", "x" => "y" )
+                                                ),
+                        "Graph Foobar" =>       "options" => array(     "Function" => "arg" ),
+                                                "data" => array(
+                                                                        "Foo"   => array( 1 => 5, 2 => 5, 3 => 5, 4 => 5, 5 => 5 ),
+                                                                        "bar"   => array( 1 => 2, 2 => 5, 3 => 6, 4 => 7, 5 => 10 )
+                                                )
+                );
+
+Use of the SimpleMysql is suggested, to simply the (x) => (y) keypair.
+
+simpleMysql = new SimpleMysql( 'host', 'user', 'pass', 'database' );
+graphArray => array( "Load Average" =>
+                        "options" =>
+                                array(  "setTimeVar" => "x",
+                                        "setLegendPosition" => "se" ),
+                        "data" =>
+                                array( "MachineName" =>
+                                                simpleMysql->getXYFromTable( "SELECT time, load FROM machine WHERE name='MachineName' ORDER BY time DESC LIMIT 200" ),
+                                        "2nd Machine" =>
+                                                simpleMysql->getXYFromTable( "SELECT time, load FROM machine WHERE name='machine2' ORDER BY time DESC LIMIT 200" )
+                                )
+                        );
