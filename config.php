@@ -68,10 +68,11 @@ $graphArray	= array(	"Load Average"	=> array(	"options" => array( 	"setTimeVar" 
 												"disableLines" => "",
 												"enablePoints" => "",
 												"setLegendContainer" => safeName("Load by Process count")."_legend",
-												"setNumLegendColumns" => 2 ),
+												"setNumLegendColumns" => 3 ),
 									"data" => array(
 										"Core01" => $simpleMysql->getXYFromTable( "SELECT loadAverage, processCount FROM machine WHERE name='core01' order by time desc limit 360" ),
-										"Core02" => $simpleMysql->getXYFromTable( "SELECT loadAverage, processCount FROM machine WHERE name='core02' order by time desc limit 360" )
+										"Core02" => $simpleMysql->getXYFromTable( "SELECT loadAverage, processCount FROM machine WHERE name='core02' order by time desc limit 360" ),
+										"NotDesktop" => $simpleMysql->getXYFromTable( "SELECT loadAverage, processCount FROM machine WHERE name='notdesktop' order by time desc limit 360" )
 									)
 								)
 			);

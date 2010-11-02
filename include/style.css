@@ -5,6 +5,8 @@ body {
 .big {
 	font-size: 120%;
 	font-weight: bold;
+}
+.big graphContainer {
 	margin-top: 5px;
 	margin-left: 5px;
 	margin-bottom: 0px;

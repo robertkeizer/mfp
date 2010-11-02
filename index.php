@@ -41,18 +41,30 @@ include './config.php';
 		</script>
 	</head>
 	<body>
-		<?php
-		foreach( $graphArray as $graphName => $graphStuff ){
-			echo "<div class='graphContainer'>\n";
-			echo "\t<table>\n";
-			echo "\t<tr>\n";
-			echo "\t<td class='big'>{$graphName}</td>\n";
-			echo "\t<td id='".safeName($graphName)."_legend'></td>\n";
-			echo "\t</tr><tr><td colspan='2'>\n";
-			echo "\t<div class='graphPlaceholder' id='".safeName($graphName)."' style='width:500px; height:100px;'></div>\n";
-			echo "\t</td></tr></table>\n";
-			echo "</div>\n";
-		}
-		?>
+		<table cellspacing='4' cellpadding='4'>
+			<tr>
+				<td align='left' width='50%' valign='top'>
+					<p>This is <span class='big'>mfp</span> ( Mysql-Flot-PHP ).</p>
+					<p>Written in PHP, <span class='big'>mfp</span> provides easy integration between MySQL and Flot. As you can see to the right if you have javascript enabled, a full range of graph types can be created.</p>
+					<p><span class='big'>mfp</span> is licensed under the GNU GPLv3, and is freely available to anyone interested.</p>
+					<p><span class='big'>mfp</span> source is available at the <a href='http://github.com/robertkeizer/mfp/'>github project page</a>.</p>
+				</td>
+				<td align='left' width='50%'>
+					<?php
+					foreach( $graphArray as $graphName => $graphStuff ){
+						echo "<div class='graphContainer'>\n";
+						echo "\t<table>\n";
+						echo "\t<tr>\n";
+						echo "\t<td class='big'>{$graphName}</td>\n";
+						echo "\t<td id='".safeName($graphName)."_legend'></td>\n";
+						echo "\t</tr><tr><td colspan='2'>\n";
+						echo "\t<div class='graphPlaceholder' id='".safeName($graphName)."' style='width:600px; height:100px;'></div>\n";
+						echo "\t</td></tr></table>\n";
+						echo "</div>\n";
+					}
+					?>
+				</td>
+			</tr>
+		</table>
 	</body>
 </html>
