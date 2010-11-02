@@ -29,7 +29,9 @@ function safeName( $name ){
 // This is just an example function to show how configs could be cut down. Modification of this function
 // will modify all the graphs queries.
 function ExampleGenSql( $y, $name ){
-	return "SELECT time, {$y} from machine WHERE name='{$name}' order by time desc limit 200";
+	// The CONCAT for time is used for turning the epoch time into javascript microseconds.. see how flot takes time arguments.
+	// The subtraction of 18000000 is for the timezone, so graph does not appear in GMT.
+	return "SELECT CONCAT(time, \"000-18000000\"), {$y} from machine WHERE name='{$name}' order by time desc limit 200";
 }
 
 $simpleMysql	= new SimpleMysql( "host", "user", "pass", "database" );
