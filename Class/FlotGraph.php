@@ -25,6 +25,8 @@ class FlotGraph{
 	private $_enableLines = true;
 	private $_enablePoints = false;
 	private $_enableBars = false;
+	private $_legendContainer = null;
+	private $_numLegendColumns = 1;
 
 	public function __construct( Array $dataArray, $placeHolder ){
 		$this->_dataArray	= $dataArray;
@@ -63,6 +65,14 @@ class FlotGraph{
 	
 	public function disableLines( ){
 		$this->_enableLines	= false;
+	}
+	
+	public function setLegendContainer( $container ){
+		$this->_legendContainer = $container;
+	}
+
+	public function setNumLegendColumns( $num ){
+		$this->_numLegendColumns = $num;
 	}
 
 	public function getJavascript( ){
@@ -121,11 +131,21 @@ class FlotGraph{
 				$returnString .= " legend: { ";
 			}
 			
-			if( $this->_legendPosition !== false ){
-				$returnString .= "show: true, position: \"{$this->_legendPosition}\"";
+			// Number of columns in the container..
+			$returnString .= " noColumns: {$this->_numLegendColumns}, ";
+
+			// Legend Container check
+			if( $this->_legendContainer !== null ){
+				$returnString .= "container: {$this->_legendContainer}";
 			}else{
-				$returnString .= "show: false";
+				// Position if not in a container..
+				if( $this->_legendPosition !== false ){
+					$returnString .= "show: true, position: \"{$this->_legendPosition}\"";
+				}else{
+					$returnString .= "show: false";
+				}
 			}
+
 			$returnString .= "}";
 			// End of legend stuff.
 
@@ -144,7 +164,7 @@ class FlotGraph{
 			}
 			
 			// Check for bars
-			if( $this->_enabledBars ){
+			if( $this->_enableBars ){
 				$returnString .= ", bars: { show: true }";
 			}else{
 				$returnString .= ", bars: { show: false }";

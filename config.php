@@ -22,6 +22,7 @@ function __autoload( $class ){
 	}
 }
 
+// The 'a' is required so that the first character is always a letter.
 function safeName( $name ){
 	return "a".md5( $name );
 }
@@ -36,21 +37,38 @@ function ExampleGenSql( $y, $name ){
 
 $simpleMysql	= new SimpleMysql( "host", "user", "pass", "database" );
 $graphArray	= array(	"Load Average"	=> array(	"options" => array( 	"setTimeVar" => "x",
-											"setLegendPosition" => "nw" ),
+											"setLegendPosition" => "nw",
+											"setLegendContainer" => safeName( "Load Average" )."_legend",
+											"setNumLegendColumns" => 3 ),
 								"data" => array(
 									"Core01" => $simpleMysql->getXYFromTable( ExampleGenSql( "loadAverage", "core01" ) ),
 									"Core02" => $simpleMysql->getXYFromTable( ExampleGenSql( "loadAverage", "core02" ) ),
 									"NotDesktop" => $simpleMysql->getXYFromTable( ExampleGenSql( "loadAverage", "notdesktop" ) )
 								)
 						),
-				"Process count" => array(	"options" => array( "setTimeVar" => "x" ),
+				"Process count" => array(	"options" => array(	"setTimeVar" => "x",
+											"setLegendContainer" => safeName( "Process count" )."_legend",
+											"setNumLegendColumns" => 3 ),
 								"data" => array( 
 									"Core01" => $simpleMysql->getXYFromTable( ExampleGenSql( "processCount", "core01" ) ),
 									"Core02" => $simpleMysql->getXYFromTable( ExampleGenSql( "processCount", "core02" ) ),
 									"NotDesktop" => $simpleMysql->getXYFromTable( ExampleGenSql( "processCount", "notdesktop" ) )
 								)
 						),
-				"Load by Process count" => array(	"options" => array( "setLegendPosition" => "nw", "disableLines" => "", "enablePoints" => "" ),
+				"User count" => array(		"options" => array(	"setTimeVar" => "x",
+											"setLegendContainer" => safeName( "User count" )."_legend",
+											"setNumLegendColumns" => 3 ),
+								"data" => array(
+									"Core01" => $simpleMysql->getXYFromTable( ExampleGenSql( "userCount", "core01" ) ),
+									"Core02" => $simpleMysql->getXYFromTable( ExampleGenSql( "userCount", "core02" ) ),
+									"NotDesktop" => $simpleMysql->getXYFromTable( ExampleGenSql( "userCount", "notdesktop" ) )
+								)
+						),
+				"Load by Process count" => array(	"options" => array(	"setLegendPosition" => "nw",
+												"disableLines" => "",
+												"enablePoints" => "",
+												"setLegendContainer" => safeName("Load by Process count")."_legend",
+												"setNumLegendColumns" => 2 ),
 									"data" => array(
 										"Core01" => $simpleMysql->getXYFromTable( "SELECT loadAverage, processCount FROM machine WHERE name='core01' order by time desc limit 360" ),
 										"Core02" => $simpleMysql->getXYFromTable( "SELECT loadAverage, processCount FROM machine WHERE name='core02' order by time desc limit 360" )

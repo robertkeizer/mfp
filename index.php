@@ -43,10 +43,15 @@ include './config.php';
 	<body>
 		<?php
 		foreach( $graphArray as $graphName => $graphStuff ){
-			echo "<div class='graphContainer'>";
-			echo "<h2>{$graphName}</h2>\n";
-			echo "<div class='graphPlaceholder' id='".safeName($graphName)."' style='width:600px; height:150px;'></div>\n";
-			echo "</div>";
+			echo "<div class='graphContainer'>\n";
+			echo "\t<table>\n";
+			echo "\t<tr>\n";
+			echo "\t<td class='big'>{$graphName}</td>\n";
+			echo "\t<td id='".safeName($graphName)."_legend'></td>\n";
+			echo "\t</tr><tr><td colspan='2'>\n";
+			echo "\t<div class='graphPlaceholder' id='".safeName($graphName)."' style='width:500px; height:100px;'></div>\n";
+			echo "\t</td></tr></table>\n";
+			echo "</div>\n";
 		}
 		?>
 	</body>

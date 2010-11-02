@@ -2,7 +2,7 @@ body {
 	font-family: Arial;
 	font-size: 120%;
 }
-.graphContainer h2 {
+.big {
 	font-size: 120%;
 	font-weight: bold;
 	margin-top: 5px;
@@ -12,4 +12,7 @@ body {
 }
 .graphPlaceholder {
 	margin: 5px;
+}
+.graphContainer{
+	margin-top: 5px;
 }
