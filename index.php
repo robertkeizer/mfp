@@ -36,7 +36,7 @@ include './config.php';
 	</head>
 	<body>
 		<?php
-		foreach( $graphArray as $graphName => $graphItemArray ){
+		foreach( $graphArray as $graphName => $graphItemTotal ){
 			echo "<h2>{$graphName}</h2>\n";
 			echo "<div id='".safeName($graphName)."' style='width:600px; height:150px;'></div>\n";
 		}

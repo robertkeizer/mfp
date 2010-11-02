@@ -22,6 +22,7 @@ class FlotGraph{
 	private $_placeHolder;
 	private $_timeVar = null;
 	private $_checkBoxes = false;
+	private $_legendPosition = "nw";
 
 	public function __construct( Array $dataArray, $placeHolder ){
 		$this->_dataArray	= $dataArray;
@@ -36,6 +37,10 @@ class FlotGraph{
 	
 	public function setCheckboxes( bool $enableCheckboxes ){
 		$this->_checkBoxes = $enableCheckBoxes;
+	}
+
+	public function setLegendPosition( $position ){
+		$this->_legendPosition	= $position;
 	}
 
 	public function getJavascript( ){
@@ -77,12 +82,31 @@ class FlotGraph{
 
 		// Open ended for a reason, namely to check if time is set..
 		$returnString	.= "$(function(){\n\t$.plot( $('#{$this->_placeHolder}'), {$this->_placeHolder}_data";
-		// Check if time var is set.
-		if( $this->_timeVar !== null ){
-			$returnString .= ", { {$this->_timeVar}axis: { mode: \"time\" } }";
+
+		// Start the options..
+		$returnString	.= ", {";
+
+			// Check if time var is set.
+			if( $this->_timeVar !== null ){
+				$returnString .= "{$this->_timeVar}axis: { mode: \"time\" }";
+			}
+
+			// Check for where the legend should be displayed, if at all.
+			$returnString .= ", legend: { ";
+			if( $this->_legendPosition !== false ){
+				$returnString .= "show: true, position: \"{$this->_legendPosition}\"";
+			}else{
+				$returnString .= "show: false";
+			}
+			$returnString .= "}";
+
+		// End the above.. to complete the javascript. End of options..
+		$returnString .= " } ); \n});";
+
+		// Check for checkboxes..
+		if( $this->_checkBoxes ){
+			// Write some fancy javascript to turn series on or off.
 		}
-		// End the above.. to complete the javascript.
-		$returnString .= "); \n});";
 
 		$returnString	.= "</script>\n";
 
