@@ -29,7 +29,7 @@ class FlotGraph{
 	}
 
 	public function setTimeVar( $var ){
-		if( strtlower( $var ) == 'x' || strtolower( $var ) == 'y' ) {
+		if( strtolower( $var ) == 'x' || strtolower( $var ) == 'y' ) {
 			$this->_timeVar = $var;
 		}
 	}
@@ -64,15 +64,7 @@ class FlotGraph{
 		$returnString	.= "var {$this->_placeHolder}_data = [ ";
 		for( $tmpCounter=0; $tmpCounter<count( $dataArrayNames ); $tmpCounter++ ){
 
-			// Open ended for a reason, no ending } so that we can check if time or special styles are applied.
-			$returnString .= "{ data: {$dataArrayNames[$tmpCounter]}_data, label: \"{$dataArrayNames[$tmpCounter]}\"";
-			// Check for time..
-			if( $this->_timeVar !== null ){
-				
-			}
-
-			// The ending }. Appended after checking for other things..
-			$returnString .= " }";
+			$returnString .= "{ data: {$dataArrayNames[$tmpCounter]}_data, label: \"{$dataArrayNames[$tmpCounter]}\" }";
 			// This is so that only the last item in the array doesn't get a ,
 			if( $tmpCounter != count( $dataArrayNames )-1 ){
 				$returnString .= ", ";
@@ -82,7 +74,16 @@ class FlotGraph{
 		$returnString	.= " ];\n";
 		
 		// Append the graph function to returnString using the placeHolder variable.
-		$returnString	.= "$(function(){\n\t$.plot($('#{$this->_placeHolder}'), {$this->_placeHolder}_data );\n});\n";
+
+		// Open ended for a reason, namely to check if time is set..
+		$returnString	.= "$(function(){\n\t$.plot( $('#{$this->_placeHolder}'), {$this->_placeHolder}_data";
+		// Check if time var is set.
+		if( $this->_timeVar !== null ){
+			$returnString .= ", { {$this->_timeVar}axis: { mode: \"time\" } }";
+		}
+		// End the above.. to complete the javascript.
+		$returnString .= "); \n});";
+
 		$returnString	.= "</script>\n";
 
 		return $returnString;
