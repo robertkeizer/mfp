@@ -27,6 +27,7 @@ include './config.php';
 		<?php
 		foreach( $graphArray as $graphName => $graphItemArray ){
 			$tmpGraphInstance = new FlotGraph( $graphItemArray, safeName( $graphName ) );
+			$tmpGraphInstance->setTimeVar("x");
 			echo $tmpGraphInstance->getJavascript(); 
 		}
 		?>
