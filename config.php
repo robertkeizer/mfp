@@ -36,7 +36,7 @@ function ExampleGenSql( $y, $name ){
 
 $simpleMysql	= new SimpleMysql( "host", "user", "pass", "database" );
 $graphArray	= array(	"Load Average"	=> array(	"options" => array( 	"setTimeVar" => "x",
-											"setLegendPosition" => false ),
+											"setLegendPosition" => "nw" ),
 								"data" => array(
 									"Core01" => $simpleMysql->getXYFromTable( ExampleGenSql( "loadAverage", "core01" ) ),
 									"Core02" => $simpleMysql->getXYFromTable( ExampleGenSql( "loadAverage", "core02" ) ),
