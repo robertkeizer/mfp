@@ -27,6 +27,7 @@ class FlotGraph{
 	private $_enableBars = false;
 	private $_legendContainer = null;
 	private $_numLegendColumns = 1;
+	private $_lineFill = false;
 
 	public function __construct( Array $dataArray, $placeHolder ){
 		$this->_dataArray	= $dataArray;
@@ -66,13 +67,21 @@ class FlotGraph{
 	public function disableLines( ){
 		$this->_enableLines	= false;
 	}
-	
+
 	public function setLegendContainer( $container ){
 		$this->_legendContainer = $container;
 	}
 
 	public function setNumLegendColumns( $num ){
 		$this->_numLegendColumns = $num;
+	}
+
+	public function enableLineFill( ){
+		$this->_lineFill = true;
+	}
+
+	public function disableLineFill( ){
+		$this->_lineFill == false;
 	}
 
 	public function getJavascript( ){
@@ -151,7 +160,12 @@ class FlotGraph{
 
 			// Check for lines..
 			if( $this->_enableLines ){
-				$returnString .= ", lines: { show: true }";
+				$returnString .= ", lines: { show: true ";
+				// Check for line fill..
+				if( $this->_lineFill ){
+					$returnString .= ", fill: true";
+				}
+				$returnString .= "}";
 			}else{
 				$returnString .= ", lines: { show: false }";
 			}
