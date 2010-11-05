@@ -43,14 +43,14 @@ include './config.php';
 	<body>
 		<table cellspacing='4' cellpadding='4'>
 			<tr>
-				<td align='left' width='50%' valign='top'>
+				<td align='left' valign='top'>
 					<p>This is <span class='big'>mfp</span> ( Mysql-Flot-PHP ).</p>
 					<p>Written in PHP, <span class='big'>mfp</span> provides easy integration between MySQL and Flot. As you can see to the right if you have javascript enabled, a full range of graph types can be rendered. All rendering is done on the client side, making <span class='big'>mfp</span> ideal for large scale operations.</p>
 					<p>Server requirements are fairly low, a web server with PHP loaded, and the PHP5-MySQL module are the only requirements. Obviously on the client side, a recent browser is required. See <a href='http://code.google.com/p/flot/'>flot</a> for supported browser listings.</p>
 					<p><span class='big'>mfp</span> is licensed under the GNU GPLv3, and is freely available to anyone interested.</p>
 					<p><span class='big'>mfp</span> source is available at the <a href='http://github.com/robertkeizer/mfp/'>github project page</a>.</p>
 				</td>
-				<td align='left' width='50%'>
+				<td align='left'>
 					<?php
 					foreach( $graphArray as $graphName => $graphStuff ){
 						echo "<div class='graphContainer'>\n";
@@ -65,6 +65,7 @@ include './config.php';
 					}
 					?>
 				</td>
+				<td>&nbsp;</td>
 			</tr>
 		</table>
 	</body>
